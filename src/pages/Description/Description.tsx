@@ -3,6 +3,18 @@ import Dompurify from 'dompurify';
 import { useState } from 'react';
 import AceEditor from 'react-ace';
 
+import "ace-builds/src-noconflict/ace";
+import "ace-builds/src-noconflict/mode-javascript"
+import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/mode-c_cpp"
+import "ace-builds/src-noconflict/mode-java"
+import "ace-builds/src-noconflict/mode-python"
+import "ace-builds/src-noconflict/ext-language_tools"
+
+
+
+
+
 function Description({ descriptionText }) {
 
 
@@ -25,8 +37,8 @@ function Description({ descriptionText }) {
     const onDrag = (e)=>{
         if (isDragging) return;
 
-        const newLeftWidth = (e.clientX / window.innerWidth)*100;
-        if(newLeftWidth >10 && newLeftWidth <90){
+        const newLeftWidth = (e.clientX / window.innerWidth) * 100;
+        if(newLeftWidth >10 && newLeftWidth < 90){
             setLeftWidth(newLeftWidth)
         }
     }
@@ -43,7 +55,7 @@ function Description({ descriptionText }) {
                     <button onClick={() => setActiveTab('submissions')}>Submission</button>
                 </div>
 
-                <div className='markdownViewer p-[20px]  '>
+                <div className='markdownViewer p-[20px] basis-1/2 '>
                     <ReactMarkdown>
                         {sanitizedMarkdown}
                     </ReactMarkdown>
@@ -58,10 +70,18 @@ function Description({ descriptionText }) {
             <div className='rightPanel h-full overflow-auto' style={{width:`${100 - leftWidth}%`}}>
                 <div className='editorContainer'>
                     <AceEditor
-                    mode='javascript'
+                    mode='cpp'
                     theme='monokai'
                     name='codeEditor'
                     className='editor'
+                    style={{width: '100%'}}
+                    setOptions={{
+                        enableBasicAutocompletion: true,
+                        enableLiveAutocompletion:true,
+                        enableSnippets:true,
+                        showLineNumbers:true,
+                        fontSize:16
+                    }}
                     > 
 
                     </AceEditor>
