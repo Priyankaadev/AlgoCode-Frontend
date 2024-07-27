@@ -23,32 +23,32 @@ function Description({ descriptionText }) {
     const [leftWidth, setLeftWidth] = useState(50);
     const [isDragging, setIsDragging] = useState(false);
 
-    const startDragging=(e)=>{
+    const startDragging=(e: MouseEvent)=>{
         setIsDragging(true)
         e.preventDefault()
     }
 
-    const stopDragging=(e)=>{
-        if (!isDragging) {
+    const stopDragging=(e: MouseEvent)=>{
+        if (isDragging) {
            setIsDragging(false) 
         }
     }
 
-    const onDrag = (e)=>{
-        if (isDragging) return;
+    const onDrag = (e: MouseEvent)=>{
+        if (!isDragging) return;
 
         const newLeftWidth = (e.clientX / window.innerWidth) * 100;
-        if(newLeftWidth >10 && newLeftWidth < 90){
+        if(newLeftWidth > 10 && newLeftWidth < 90){
             setLeftWidth(newLeftWidth)
         }
     }
 
     return (
-        <div className='container flex w-full h-[100vh]'
+        <div className=' flex w-full h-[100vh]'
         onMouseMove={onDrag}
         onMouseUp={stopDragging}
         >
-            <div className='leftPanel h-full overflow-auto' style={{width:`${leftWidth}%}`}}>
+            <div className='leftPanel h-full overflow-auto' style={{width:`${leftWidth}%`}}>
                 <div className='tabs'>
                     <button onClick={() => setActiveTab('statement')}>Editorial</button>
                     <button onClick={() => setActiveTab('editorial')}>Problem Statement</button>
@@ -63,7 +63,7 @@ function Description({ descriptionText }) {
 
             </div>
 
-            <div className='divider cursor-col-resize w-[5px] h-full bg-slate-200'
+            <div className='divider bg-red-400 cursor-col-resize w-[5px] h-full bg-slate-200'
             onMouseDown={startDragging}
             ></div>
 
