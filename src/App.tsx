@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar'
 import './App.css'
 import Description from './pages/Description/Description'
+import SideBar from './components/SideBar'
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
   return (
     <>
     <Navbar />
+    <SideBar />
      <Description descriptionText={markdownText}>
      </Description>
      </>
