@@ -15,7 +15,7 @@ import "ace-builds/src-noconflict/ext-language_tools"
 
 
 
-function Description({ descriptionText }) {
+function Description({ descriptionText }: { descriptionText: string }) {
 
 
     const sanitizedMarkdown = Dompurify.sanitize(descriptionText)
@@ -23,36 +23,45 @@ function Description({ descriptionText }) {
     const [leftWidth, setLeftWidth] = useState(50);
     const [isDragging, setIsDragging] = useState(false);
 
-    const startDragging=(e: MouseEvent)=>{
+    const startDragging = (e: MouseEvent) => {
         setIsDragging(true)
         e.preventDefault()
     }
 
-    const stopDragging=(e: MouseEvent)=>{
+    const stopDragging = (e: MouseEvent) => {
         if (isDragging) {
-           setIsDragging(false) 
+            setIsDragging(false)
         }
     }
 
-    const onDrag = (e: MouseEvent)=>{
+    const onDrag = (e: MouseEvent) => {
         if (!isDragging) return;
 
         const newLeftWidth = (e.clientX / window.innerWidth) * 100;
-        if(newLeftWidth > 10 && newLeftWidth < 90){
+        if (newLeftWidth > 10 && newLeftWidth < 90) {
             setLeftWidth(newLeftWidth)
+        }
+    }
+
+    const isActiveTab = (tabName : string)=>{
+        if (activeTab == tabName) {
+            return 'tab tab-active';
+        }else {
+            return 'tab'
         }
     }
 
     return (
         <div className=' flex w-full h-[100vh]'
-        onMouseMove={onDrag}
-        onMouseUp={stopDragging}
+            onMouseMove={onDrag}
+            onMouseUp={stopDragging}
         >
-            <div className='leftPanel h-full overflow-auto' style={{width:`${leftWidth}%`}}>
-                <div className='tabs'>
-                    <button onClick={() => setActiveTab('statement')}>Editorial</button>
-                    <button onClick={() => setActiveTab('editorial')}>Problem Statement</button>
-                    <button onClick={() => setActiveTab('submissions')}>Submission</button>
+            <div className='leftPanel h-full overflow-auto' style={{ width: `${leftWidth}%` }}>
+               
+                <div role="tablist" className="tabs tabs-boxed tabs-sm w-2/4">
+                    <a  onClick={() => setActiveTab('statement')} role="tab" className={isActiveTab("statement")}>Problem Statement </a>
+                    <a onClick={() => setActiveTab('editorial')} role="tab" className={isActiveTab("editorial")}>Editorial</a>
+                    <a onClick={() => setActiveTab('submissions')} role="tab" className={isActiveTab("submissions")}>Submission</a>
                 </div>
 
                 <div className='markdownViewer p-[20px] basis-1/2 '>
@@ -64,25 +73,25 @@ function Description({ descriptionText }) {
             </div>
 
             <div className='divider bg-red-400 cursor-col-resize w-[5px] h-full bg-slate-200'
-            onMouseDown={startDragging}
+                onMouseDown={startDragging}
             ></div>
 
-            <div className='rightPanel h-full overflow-auto' style={{width:`${100 - leftWidth}%`}}>
+            <div className='rightPanel h-full overflow-auto' style={{ width: `${100 - leftWidth}%` }}>
                 <div className='editorContainer'>
                     <AceEditor
-                    mode='cpp'
-                    theme='monokai'
-                    name='codeEditor'
-                    className='editor'
-                    style={{width: '100%'}}
-                    setOptions={{
-                        enableBasicAutocompletion: true,
-                        enableLiveAutocompletion:true,
-                        enableSnippets:true,
-                        showLineNumbers:true,
-                        fontSize:16
-                    }}
-                    > 
+                        mode='cpp'
+                        theme='monokai'
+                        name='codeEditor'
+                        className='editor'
+                        style={{ width: '100%' }}
+                        setOptions={{
+                            enableBasicAutocompletion: true,
+                            enableLiveAutocompletion: true,
+                            enableSnippets: true,
+                            showLineNumbers: true,
+                            fontSize: 16
+                        }}
+                    >
 
                     </AceEditor>
                 </div>
