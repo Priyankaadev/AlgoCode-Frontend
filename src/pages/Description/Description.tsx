@@ -2,6 +2,7 @@ import ReactMarkdown from 'react-markdown';
 import Dompurify from 'dompurify';
 import { useState } from 'react';
 import AceEditor from 'react-ace';
+import rehypeRaw from 'rehype-raw';
 
 import "ace-builds/src-noconflict/ace";
 import "ace-builds/src-noconflict/mode-javascript"
@@ -65,7 +66,7 @@ function Description({ descriptionText }: { descriptionText: string }) {
                 </div>
 
                 <div className='markdownViewer p-[20px] basis-1/2 '>
-                    <ReactMarkdown>
+                    <ReactMarkdown rehypePlugins={[rehypeRaw]}>
                         {sanitizedMarkdown}
                     </ReactMarkdown>
                 </div>
