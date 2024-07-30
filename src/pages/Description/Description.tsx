@@ -80,10 +80,10 @@ function Description({ descriptionText }: { descriptionText: string }) {
             <div className='rightPanel h-full overflow-auto' style={{ width: `${100 - leftWidth}%` }}>
                 <div className='flex justify-start items-center py-2 px-4 gap-2'>
                     <div>
-                    <button className="btn btn-warning btn-sm">Warning</button>
+                    <button className="btn btn-warning btn-sm">Run</button>
                     </div>
                     <div>
-                    <button className="btn btn-success btn-sm">Success</button>
+                    <button className="btn btn-success btn-sm">Submit</button>
                     </div>
                     <div>
                     <select className='select select-sm select-info select-bordered w-full max-w-xs'>
