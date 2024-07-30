@@ -78,6 +78,34 @@ function Description({ descriptionText }: { descriptionText: string }) {
             ></div>
 
             <div className='rightPanel h-full overflow-auto' style={{ width: `${100 - leftWidth}%` }}>
+                <div className='flex justify-start items-center py-2 px-4 gap-2'>
+                    <div>
+                    <button className="btn btn-warning btn-sm">Warning</button>
+                    </div>
+                    <div>
+                    <button className="btn btn-success btn-sm">Success</button>
+                    </div>
+                    <div>
+                    <select className='select select-sm select-info select-bordered w-full max-w-xs'>
+                        <option disabled selected>Language</option>
+                        <option value=''>CPP</option>
+                        <option value=''>Java</option>
+                        <option value=''>JS</option>
+                        <option value=''>Python</option>
+                    </select>
+                    </div>
+        
+                    <div>
+                    <select className='select select-primary select-sm select-bordered w-full max-w-xs'>
+                        <option disabled selected>Theme</option>
+                        <option value=''>Monokai</option>
+                        <option value=''>GitHub</option>
+                        <option value=''>GitHub Dark</option>
+                    </select>
+                    </div>
+        
+                </div>
+                
                 <div className='editorContainer'>
                     <AceEditor
                         mode='cpp'
