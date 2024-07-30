@@ -3,6 +3,7 @@ import Dompurify from 'dompurify';
 import { useState } from 'react';
 import AceEditor from 'react-ace';
 import rehypeRaw from 'rehype-raw';
+import Languages from '../../constants/Languages';
 
 import "ace-builds/src-noconflict/ace";
 import "ace-builds/src-noconflict/mode-javascript"
@@ -24,6 +25,7 @@ function Description({ descriptionText }: { descriptionText: string }) {
     const [leftWidth, setLeftWidth] = useState(50);
     const [isDragging, setIsDragging] = useState(false);
 
+    const [language, setLanguage] = useState('javascript');
     const startDragging = (e: MouseEvent) => {
         setIsDragging(true)
         e.preventDefault()
@@ -86,12 +88,14 @@ function Description({ descriptionText }: { descriptionText: string }) {
                     <button className="btn btn-success btn-sm">Submit</button>
                     </div>
                     <div>
-                    <select className='select select-sm select-info select-bordered w-full max-w-xs'>
-                        <option disabled selected>Language</option>
-                        <option value=''>CPP</option>
-                        <option value=''>Java</option>
-                        <option value=''>JS</option>
-                        <option value=''>Python</option>
+                    <select className='select select-sm select-info select-bordered w-full max-w-xs' 
+                    value={language}
+                    onChange={(e)=> setLanguage(e.target.value) }
+                    >
+                        {Languages.map((language: languageSupport)=>(
+                             <option key={language.value} value={language.value}>{language.languageName}</option>
+                        ) )}
+                   
                     </select>
                     </div>
         
@@ -108,7 +112,7 @@ function Description({ descriptionText }: { descriptionText: string }) {
                 
                 <div className='editorContainer'>
                     <AceEditor
-                        mode='cpp'
+                        mode={language}
                         theme='monokai'
                         name='codeEditor'
                         className='editor'
