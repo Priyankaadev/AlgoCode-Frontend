@@ -13,8 +13,20 @@ import "ace-builds/src-noconflict/mode-java"
 import "ace-builds/src-noconflict/mode-python"
 import "ace-builds/src-noconflict/ext-language_tools"
 
+import "ace-builds/src-noconflict/theme-tomorrow"
+import "ace-builds/src-noconflict/theme-kuroir"
+import "ace-builds/src-noconflict/theme-twilight"
+import "ace-builds/src-noconflict/theme-xcode"
+import "ace-builds/src-noconflict/theme-textmate"
+import "ace-builds/src-noconflict/theme-solarized_dark"
+import "ace-builds/src-noconflict/theme-solarized_light"
+import "ace-builds/src-noconflict/theme-terminal"
 
 
+type themeStyle = {
+    themeName: string,
+    value: string
+}
 
 
 function Description({ descriptionText }: { descriptionText: string }) {
@@ -26,6 +38,8 @@ function Description({ descriptionText }: { descriptionText: string }) {
     const [isDragging, setIsDragging] = useState(false);
 
     const [language, setLanguage] = useState('javascript');
+    const [theme, setTheme] = useState('monokai');
+
     const startDragging = (e: MouseEvent) => {
         setIsDragging(true)
         e.preventDefault()
@@ -100,11 +114,15 @@ function Description({ descriptionText }: { descriptionText: string }) {
                     </div>
         
                     <div>
-                    <select className='select select-primary select-sm select-bordered w-full max-w-xs'>
-                        <option disabled selected>Theme</option>
-                        <option value=''>Monokai</option>
-                        <option value=''>GitHub</option>
-                        <option value=''>GitHub Dark</option>
+                    <select 
+                    className='select select-info w-full select-sm max-w-xs'
+                    value={theme}
+                    onChange={(e)=> setTheme(e.target.value)}
+                    >
+                        {Themes.map((theme : themeStyle)=>(
+                            <option key={theme.value} value={theme.value}>{theme.themeName}</option>
+                        ))}
+                        
                     </select>
                     </div>
         
@@ -113,7 +131,7 @@ function Description({ descriptionText }: { descriptionText: string }) {
                 <div className='editorContainer'>
                     <AceEditor
                         mode={language}
-                        theme='monokai'
+                        theme={theme}
                         name='codeEditor'
                         className='editor'
                         style={{ width: '100%' }}
