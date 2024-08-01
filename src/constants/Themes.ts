@@ -15,6 +15,21 @@ export default [
         themeName : 'Kuroir', value : 'kuroir'
     },
     {
-        themeName : 'Kuroir', value : 'kuroir'
+        themeName : 'Twilight', value : 'twilight'
+    },
+    {
+        themeName : 'Xcode', value : 'xcode'
+    },
+    {
+        themeName : 'Textmate', value : 'textmate'
+    },
+    {
+        themeName : 'Solarized Dark', value : 'solarized_dark'
+    },
+    {
+        themeName : 'Solarized Light', value : 'solarized_light'
+    },
+    {
+        themeName : 'Terminal', value : 'terminal'
     },
 ] 
