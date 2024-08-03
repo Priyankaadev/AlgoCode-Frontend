@@ -28,6 +28,10 @@ type themeStyle = {
     themeName: string,
     value: string
 }
+type languageSupport = {
+    languageName: string,
+    value: string
+}
 
 
 function Description({ descriptionText }: { descriptionText: string }) {
@@ -61,10 +65,10 @@ function Description({ descriptionText }: { descriptionText: string }) {
         }
     }
 
-    const isActiveTab = (tabName : string)=>{
+    const isActiveTab = (tabName: string) => {
         if (activeTab == tabName) {
             return 'tab tab-active';
-        }else {
+        } else {
             return 'tab'
         }
     }
@@ -75,9 +79,9 @@ function Description({ descriptionText }: { descriptionText: string }) {
             onMouseUp={stopDragging}
         >
             <div className='leftPanel h-full overflow-auto' style={{ width: `${leftWidth}%` }}>
-               
+
                 <div role="tablist" className="tabs tabs-boxed tabs-sm w-2/4">
-                    <a  onClick={() => setActiveTab('statement')} role="tab" className={isActiveTab("statement")}>Problem Statement </a>
+                    <a onClick={() => setActiveTab('statement')} role="tab" className={isActiveTab("statement")}>Problem Statement </a>
                     <a onClick={() => setActiveTab('editorial')} role="tab" className={isActiveTab("editorial")}>Editorial</a>
                     <a onClick={() => setActiveTab('submissions')} role="tab" className={isActiveTab("submissions")}>Submission</a>
                 </div>
@@ -97,38 +101,38 @@ function Description({ descriptionText }: { descriptionText: string }) {
             <div className='rightPanel h-full overflow-auto' style={{ width: `${100 - leftWidth}%` }}>
                 <div className='flex justify-start items-center py-2 px-4 gap-2'>
                     <div>
-                    <button className="btn btn-warning btn-sm">Run</button>
+                        <button className="btn btn-warning btn-sm">Run</button>
                     </div>
                     <div>
-                    <button className="btn btn-success btn-sm">Submit</button>
+                        <button className="btn btn-success btn-sm">Submit</button>
                     </div>
                     <div>
-                    <select className='select select-sm select-info select-bordered w-full max-w-xs' 
-                    value={language}
-                    onChange={(e)=> setLanguage(e.target.value) }
-                    >
-                        {Languages.map((language: languageSupport)=>(
-                             <option key={language.value} value={language.value}>{language.languageName}</option>
-                        ) )}
-                   
-                    </select>
+                        <select className='select select-sm select-info select-bordered w-full max-w-xs'
+                            value={language}
+                            onChange={(e) => setLanguage(e.target.value)}
+                        >
+                            {Languages.map((language: languageSupport) => (
+                                <option key={language.value} value={language.value}>{language.languageName}</option>
+                            ))}
+
+                        </select>
                     </div>
-        
+
                     <div>
-                    <select 
-                    className='select select-info w-full select-sm max-w-xs'
-                    value={theme}
-                    onChange={(e)=> setTheme(e.target.value)}
-                    >
-                        {Themes.map((theme : themeStyle)=>(
-                            <option key={theme.value} value={theme.value}>{theme.themeName}</option>
-                        ))}
-                        
-                    </select>
+                        <select
+                            className='select select-info w-full select-sm max-w-xs'
+                            value={theme}
+                            onChange={(e) => setTheme(e.target.value)}
+                        >
+                            {Themes.map((theme: themeStyle) => (
+                                <option key={theme.value} value={theme.value}>{theme.themeName}</option>
+                            ))}
+
+                        </select>
                     </div>
-        
+
                 </div>
-                
+
                 <div className='editorContainer'>
                     <AceEditor
                         mode={language}
@@ -146,6 +150,20 @@ function Description({ descriptionText }: { descriptionText: string }) {
                     >
 
                     </AceEditor>
+                </div>
+
+                {/* collapsable test case part */}
+
+                <div className="bg-base-200 collapse">
+                    <input type="checkbox" className="peer" />
+                    <div
+                        className="collapse-title bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
+                       Console
+                    </div>
+                    <div
+                        className="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
+                        <p>hello</p>
+                    </div>
                 </div>
             </div>
         </div>
