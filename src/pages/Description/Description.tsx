@@ -39,6 +39,7 @@ function Description({ descriptionText }: { descriptionText: string }) {
 
     const sanitizedMarkdown = Dompurify.sanitize(descriptionText)
     const [activeTab, setActiveTab] = useState('statement')
+    const [testCaseTab, setTestCaseTab] = useState('input')
     const [leftWidth, setLeftWidth] = useState(50);
     const [isDragging, setIsDragging] = useState(false);
 
@@ -69,6 +70,16 @@ function Description({ descriptionText }: { descriptionText: string }) {
         if (activeTab == tabName) {
             return 'tab tab-active';
         } else {
+            return 'tab'
+        }
+    }
+
+    const isInputTabActive =  (tabName: string)=>{
+        if (testCaseTab == tabName) {
+            return 'tab tab-active';
+                        
+        }
+        else{
             return 'tab'
         }
     }
@@ -139,6 +150,7 @@ function Description({ descriptionText }: { descriptionText: string }) {
                         theme={theme}
                         name='codeEditor'
                         className='editor'
+                        height='500px'
                         style={{ width: '100%' }}
                         setOptions={{
                             enableBasicAutocompletion: true,
@@ -154,15 +166,20 @@ function Description({ descriptionText }: { descriptionText: string }) {
 
                 {/* collapsable test case part */}
 
-                <div className="bg-base-200 collapse">
+                <div className="bg-base-200 rounded-none collapse">
                     <input type="checkbox" className="peer" />
                     <div
-                        className="collapse-title bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-                       Console
+                        className="collapse-title  bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
+                        Console
                     </div>
                     <div
                         className="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-                        <p>hello</p>
+                        <div role="tablist" className="tabs tabs-boxed tabs-sm w-2/4 mb-4">
+                    <a onClick={()=>setTestCaseTab('input')} role="tab" className={isInputTabActive('input')}>Input</a>
+                    <a onClick={()=>setTestCaseTab('output')}  role="tab" className={isInputTabActive('output')}>Output</a>
+                </div>
+                       
+                       {(testCaseTab == 'input') ? <textarea name="" className='bg-neutral text-white rounded-md resize-none' rows={4} cols={80}></textarea> : <div className='h-8 w-12'></div> }
                     </div>
                 </div>
             </div>
